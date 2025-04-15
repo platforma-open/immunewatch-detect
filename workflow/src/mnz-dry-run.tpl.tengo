@@ -1,0 +1,31 @@
+self := import("@platforma-sdk/workflow-tengo:tpl")
+exec := import("@platforma-sdk/workflow-tengo:exec")
+xsv := import("@platforma-sdk/workflow-tengo:pframes.xsv")
+pConstants := import("@platforma-sdk/workflow-tengo:pframes.constants")
+monetization := import("@platforma-sdk/workflow-tengo:exec.monetization")
+maps := import("@platforma-sdk/workflow-tengo:maps")
+
+times := import("times")
+ll := import("@platforma-sdk/workflow-tengo:ll")
+
+self.defineOutputs(["mnzInfo"])
+
+self.body(func(inputs) {
+	mnz := monetization.
+			builder("PRODUCT:/* Product Key */").
+			setDate(inputs.__mnzDate)
+
+    inputMap := inputs.files.inputs()
+	for sKey in maps.getKeys(inputMap) {
+		inputFile := inputMap[sKey]
+        mnz.addRun().
+            addFile(inputFile, {
+                arg: "repertoire",
+                metrics: ["sha256", "size"]
+            })
+    }
+
+    return {
+        mnzInfo: mnz.build()
+    }
+})

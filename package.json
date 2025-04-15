@@ -1,0 +1,59 @@
+{
+  "name": "@platforma-open/immunewatch.detect",
+  "version": "1.0.0",
+  "scripts": {
+    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,vue}\"",
+    "build": "turbo run build",
+    "build:dev": "env PL_PKG_DEV=local turbo run build",
+    "mark-stable": "turbo run mark-stable",
+    "do-pack": "turbo run do-pack",
+    "watch": "turbo watch build",
+    "lint": "pnpm -r lint",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "update-sdk": "node scripts/update-sdk-packages.js"
+  },
+  "files": [
+    "index.d.ts",
+    "index.js"
+  ],
+  "devDependencies": {
+    "turbo": "catalog:",
+    "@changesets/cli": "catalog:",
+    "js-yaml": "catalog:"
+  },
+  "//": {
+    "pnpm": {
+      "overrides": {
+        "@platforma-sdk/model": "file:/Users/dbolotin/mi/core/platforma/sdk/model/package.tgz",
+        "@platforma-sdk/ui-vue": "file:/Users/dbolotin/mi/core/platforma/sdk/ui-vue/package.tgz",
+        "@milaboratories/uikit": "file:/Users/dbolotin/mi/core/platforma/lib/ui/uikit/package.tgz",
+        "@platforma-sdk/workflow-tengo": "file:/Users/dbolotin/mi/core/platforma/sdk/workflow-tengo/package.tgz",
+        "@milaboratories/pl-model-common": "file:/Users/dbolotin/mi/core/platforma/lib/model/common/package.tgz",
+        "@platforma-sdk/tengo-builder": "file:/Users/dbolotin/mi/core/platforma/tools/tengo-builder/package.tgz",
+        "@milaboratories/pl-middle-layer": "file:/Users/dbolotin/mi/core/platforma/lib/node/pl-middle-layer/package.tgz"
+      }
+    }
+  },
+  "///": {
+    "pnpm": {
+      "overrides": {
+        "@milaboratories/pl-model-common": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/lib/model/common/package.tgz",
+        "@platforma-sdk/model": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/sdk/model/package.tgz",
+        "@platforma-sdk/ui-vue": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/sdk/ui-vue/package.tgz",
+        "@platforma-sdk/workflow-tengo": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/sdk/workflow-tengo/package.tgz",
+        "@milaboratories/uikit": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/lib/ui/uikit/package.tgz"
+      }
+    }
+  },
+  "pnpm": {
+    "overrides": {
+      "@milaboratories/pl-model-common": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/lib/model/common/package.tgz",
+        "@platforma-sdk/model": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/sdk/model/package.tgz",
+        "@platforma-sdk/ui-vue": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/sdk/ui-vue/package.tgz",
+        "@platforma-sdk/workflow-tengo": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/sdk/workflow-tengo/package.tgz",
+        "@milaboratories/uikit": "file:/Users/poslavskysv/Projects/milab/platforma/platforma-sdk/lib/ui/uikit/package.tgz"
+    }
+  },
+  "packageManager": "pnpm@9.12.0"
+}

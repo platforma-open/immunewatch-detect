@@ -1,0 +1,52 @@
+{
+  "name": "@platforma-open/immunewatch.detect",
+  "version": "1.0.0",
+  "scripts": {
+    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,vue}\"",
+    "build": "rm -rf ./block-pack && block-tools pack",
+    "mark-stable": "block-tools mark-stable -r 's3://milab-euce1-prod-pkgs-s3-block-registry/pub/releases/?region=eu-central-1'",
+    "prepublishOnly": "block-tools pack && block-tools publish -r 's3://milab-euce1-prod-pkgs-s3-block-registry/pub/releases/?region=eu-central-1'",
+    "do-pack": "rm -f *.tgz && block-tools pack && pnpm pack && mv *.tgz package.tgz"
+  },
+  "files": [
+    "index.d.ts",
+    "index.js"
+  ],
+  "dependencies": {
+    "@platforma-open/immunewatch.detect.workflow": "workspace:*",
+    "@platforma-open/immunewatch.detect.model": "workspace:*",
+    "@platforma-open/immunewatch.detect.ui": "workspace:*"
+  },
+  "block": {
+    "components": {
+      "workflow": "@platforma-open/immunewatch.detect.workflow/dist/tengo/tpl/main.plj.gz",
+      "model": "@platforma-open/immunewatch.detect.model/dist/model.json",
+      "ui": "@platforma-open/immunewatch.detect.ui/dist"
+    },
+    "meta": {
+      "title": "ImmuneWatch DETECT",
+      "logo": "file:../logos/block-logo.png",
+      "url": "https://www.immunewatch.com/solutions/imw-detect",
+      "docs": "https://immunewatch.gitlab.io/detect-docs/",
+      "support": "mailto:business@immunewatch.com",
+      "description": "TCR specificity annotations for comprehensive T-cell response analysis.",
+      "longDescription": "file:../docs/description.md",
+      "changelog": "file:CHANGELOG.md",
+      "tags": [
+        "airr",
+        "downstream",
+        "repertoire",
+        "tcr-specificity"
+      ],
+      "organization": {
+        "name": "ImmuneWatch BV",
+        "url": "https://immunewatch.com/",
+        "logo": "file:../logos/immunewatch-logo.svg"
+      }
+    }
+  },
+  "devDependencies": {
+    "@platforma-sdk/block-tools": "catalog:"
+  },
+  "packageManager": "pnpm@9.12.0"
+}

@@ -1,0 +1,35 @@
+
+vHitQuery := {
+	axes: [{ anchor: "main", idx: 0 }],
+	name: "pl7.app/vdj/geneHit",
+	domain: {
+		"pl7.app/vdj/reference": "VGene"//,
+		// "pl7.app/vdj/scClonotypeChain": { anchor: "main" },
+		// "pl7.app/vdj/scClonotypeChain/index": { anchor: "main" }
+	}
+}
+
+jHitQuery := {
+	axes: [{ anchor: "main", idx: 0 }],
+	name: "pl7.app/vdj/geneHit",
+	domain: {
+		"pl7.app/vdj/reference": "JGene"//,
+		// "pl7.app/vdj/scClonotypeChain": { anchor: "main" },
+		// "pl7.app/vdj/scClonotypeChain/index": { anchor: "main" }
+	}
+}
+
+abundanceQuery := {
+	axes: [{ name: "pl7.app/sampleId", type: "String" }, { anchor: "main", idx: 0 }],
+	annotations: {
+		"pl7.app/isAbundance": "true",
+		"pl7.app/abundance/normalized": "true",
+		"pl7.app/abundance/isPrimary": "true"
+	}
+}
+
+export {
+    vHit: vHitQuery,
+    jHit: jHitQuery,
+    abundance: abundanceQuery
+}

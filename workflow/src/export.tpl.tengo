@@ -1,0 +1,47 @@
+self := import("@platforma-sdk/workflow-tengo:tpl")
+maps := import("@platforma-sdk/workflow-tengo:maps")
+ll := import("@platforma-sdk/workflow-tengo:ll")
+xsv := import("@platforma-sdk/workflow-tengo:pframes.xsv")
+
+self.defineOutputs("file")
+
+overrideLabel := func(col, label) {
+	axisTr := func(spec) {
+		spec[0].annotations = {
+			"pl7.app/label": "clonotypeKey"
+		}
+		return spec
+	}
+
+	return maps.deepTransform(col, {
+		spec: {
+			axesSpec: axisTr,
+			annotations: {
+				"pl7.app/label": label
+			}
+		}
+	})
+}
+
+self.body(func(inputs) {
+	abundanceData := inputs.__value__
+	abundanceSpec := inputs.__distilled_aggregation_spec__
+    cdr3 := inputs.cdr3
+    vHit := inputs.vHit
+    jHit := inputs.jHit
+
+	file := xsv.exportFrame(
+		[
+			overrideLabel({data: abundanceData, spec: abundanceSpec}, "abundance"),
+			overrideLabel(cdr3, "junction_aa"),
+			overrideLabel(vHit, "v_call"),
+			overrideLabel(jHit, "j_call")
+		],
+		"csv",
+		{ joinType: "Inner" }
+	)
+
+	return {
+        file: file
+    }
+})

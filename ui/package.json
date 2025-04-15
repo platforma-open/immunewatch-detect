@@ -1,0 +1,28 @@
+{
+  "name": "@platforma-open/immunewatch.detect.ui",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "watch": "vue-tsc && vite build --watch",
+    "build": "vue-tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@platforma-open/immunewatch.detect.model": "workspace:*",
+    "@milaboratories/graph-maker": "catalog:",
+    "ag-grid-enterprise": "catalog:",
+    "ag-grid-vue3": "catalog:",
+    "@platforma-sdk/ui-vue": "catalog:",
+    "@platforma-sdk/model": "catalog:",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vue-tsc": "catalog:",
+    "@platforma-sdk/eslint-config": "catalog:"
+  }
+}

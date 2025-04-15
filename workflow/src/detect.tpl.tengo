@@ -1,0 +1,50 @@
+self := import("@platforma-sdk/workflow-tengo:tpl")
+exec := import("@platforma-sdk/workflow-tengo:exec")
+xsv := import("@platforma-sdk/workflow-tengo:pframes.xsv")
+assets := import("@platforma-sdk/workflow-tengo:assets")
+times := import("times")
+ll := import("@platforma-sdk/workflow-tengo:ll")
+
+detectSw := assets.importSoftware("@platforma-open/milaboratories.software-detect:detect")
+
+self.defineOutputs(["logs", "nEpitopes", "detectTsv"])
+
+self.body(func(inputs) {
+	inputFile := inputs.__value__
+	imw_detect := exec.builder().
+		software(detectSw).
+		printErrStreamToStdout().
+		arg("-o").arg("result.tsv").
+		arg("-i").arg("input.csv").
+		arg("-d").arg("imwdb").
+		enableMnz("PRODUCT:/* Product Key */").
+		addFile("input.csv", inputFile, {
+			mnz: {
+				arg: "main_input",
+				metrics: ["sha256", "size"]
+			}
+		}).
+		saveFile("result.tsv").
+		cache(48 * times.hour).
+		saveStdoutContent().
+		run()
+
+	imw_result := imw_detect.getFile("result.tsv")
+
+	// get stats
+	stats := exec.builder().
+	  	cmd("/usr/bin/env").
+  		printErrStreamToStdout().
+		arg("bash").arg("-c").
+  		arg("cut -f7 input.csv | sort | uniq | wc -l").
+		addFile("input.csv", imw_result).
+		saveStdoutContent().
+		inLightQueue().
+		run()
+
+	return {
+        logs: imw_detect.getStdoutStream(),
+        nEpitopes: stats.getStdoutFileContent(),
+		detectTsv: imw_result
+    }
+})
