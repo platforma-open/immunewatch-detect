@@ -27,6 +27,8 @@ export const model = BlockModel.create()
   })
   .withUiState<UiState>({})
 
+  .argsValid((ctx) => ctx.args.aaSeqCDR3Ref !== undefined && ctx.args.__mnzCanRun)
+
   /** We have to use abundance column as our anchor column as CDR3 has  */
   .output('cdr3Options', (ctx) =>
     ctx.resultPool.getOptions((c) =>

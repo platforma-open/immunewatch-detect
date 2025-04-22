@@ -61,7 +61,5 @@ export const resultMap = computed((): Record<string, ResultEntry> | undefined =>
     r[nEps.key[0]].nEpitopes = nEps.value;
   }
 
-  console.log(app.model.outputs.progress);
-  console.log(r);
   return r;
 });

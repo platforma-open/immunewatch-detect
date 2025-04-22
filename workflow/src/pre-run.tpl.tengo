@@ -12,6 +12,9 @@ exportTpl := assets.importTemplate(":export")
 queries := import(":queries")
 
 wf.prepare(func(args) {
+	if is_undefined(args.aaSeqCDR3Ref) {
+		return {}
+	}
 	bundleBuilder := wf.createPBundleBuilder()
 	bundleBuilder.addAnchor("main", args.aaSeqCDR3Ref)
 	bundleBuilder.addSingle(queries.vHit, "vHit")
@@ -23,6 +26,14 @@ wf.prepare(func(args) {
 })
 
 wf.body(func(args) {
+	if is_undefined(args.aaSeqCDR3Ref) {
+		return {
+			outputs: {
+				mnzInfo: {}
+			},
+			exports: {}
+		}
+	}
 	columns := args.columns
 
 	cdr3 := columns.getColumn(args.aaSeqCDR3Ref)
