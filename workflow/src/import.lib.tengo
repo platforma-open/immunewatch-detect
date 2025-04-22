@@ -28,7 +28,7 @@ spec := func(abundanceSpec) {
 					naRegex: "0.0",
 					spec: {
 						name: "immunewatch.com/detect/score",
-						valueType: "String",
+						valueType: "Float",
 						annotations: {
 							"pl7.app/label": "Score",
 							"pl7.app/info": "Represents the binding score, which ranges from 0 (no binding) to 1 (highest binding), indicating the likelihood of the TCR recognizing the annotated epitope. For most purposes, when using the IMWdb as the database, we recommend a score cut-off of 0.2 for determining reliable predictions."

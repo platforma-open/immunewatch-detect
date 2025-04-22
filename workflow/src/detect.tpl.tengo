@@ -2,10 +2,10 @@ self := import("@platforma-sdk/workflow-tengo:tpl")
 exec := import("@platforma-sdk/workflow-tengo:exec")
 xsv := import("@platforma-sdk/workflow-tengo:pframes.xsv")
 assets := import("@platforma-sdk/workflow-tengo:assets")
-times := import("times")
 ll := import("@platforma-sdk/workflow-tengo:ll")
+productKey := import(":product-key")
 
-detectSw := assets.importSoftware("@platforma-open/milaboratories.software-detect:detect")
+detectSw := assets.importSoftware("@platforma-open/immunewatch.software-detect:detect")
 
 self.defineOutputs(["logs", "nEpitopes", "detectTsv"])
 
@@ -17,7 +17,7 @@ self.body(func(inputs) {
 		arg("-o").arg("result.tsv").
 		arg("-i").arg("input.csv").
 		arg("-d").arg("imwdb").
-		enableMnz("PRODUCT:/* Product Key */").
+		enableMnz(productKey).
 		addFile("input.csv", inputFile, {
 			mnz: {
 				arg: "main_input",
@@ -25,7 +25,7 @@ self.body(func(inputs) {
 			}
 		}).
 		saveFile("result.tsv").
-		cache(48 * times.hour).
+		cacheHours(48).
 		saveStdoutContent().
 		run()
 

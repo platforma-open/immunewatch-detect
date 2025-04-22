@@ -4,6 +4,7 @@ xsv := import("@platforma-sdk/workflow-tengo:pframes.xsv")
 pConstants := import("@platforma-sdk/workflow-tengo:pframes.constants")
 monetization := import("@platforma-sdk/workflow-tengo:exec.monetization")
 maps := import("@platforma-sdk/workflow-tengo:maps")
+productKey := import(":product-key")
 
 times := import("times")
 ll := import("@platforma-sdk/workflow-tengo:ll")
@@ -12,7 +13,7 @@ self.defineOutputs(["mnzInfo"])
 
 self.body(func(inputs) {
 	mnz := monetization.
-			builder("PRODUCT:/* Product Key */").
+			builder(productKey).
 			setDate(inputs.__mnzDate)
 
     inputMap := inputs.files.inputs()
