@@ -16,7 +16,7 @@ spec := func(abundanceSpec) {
 						name: "immunewatch.com/epitope",
 						valueType: "String",
 						annotations: {
-							"pl7.app/label": "Epitope",
+							"pl7.app/label": "DETECT Epitope",
 							"pl7.app/info": " The ImmuneWatch DETECT algorithm annotates the epitope specificity of TCRs based on the likeliest epitope from the provided database to be recognized by the TCR. If no corresponding epitope is identified, the value will be 'None'."
 						}
 					}
@@ -30,8 +30,10 @@ spec := func(abundanceSpec) {
 						name: "immunewatch.com/detect/score",
 						valueType: "Float",
 						annotations: {
-							"pl7.app/label": "Score",
-							"pl7.app/info": "Represents the binding score, which ranges from 0 (no binding) to 1 (highest binding), indicating the likelihood of the TCR recognizing the annotated epitope. For most purposes, when using the IMWdb as the database, we recommend a score cut-off of 0.2 for determining reliable predictions."
+							"pl7.app/label": "DETECT Score",
+							"pl7.app/info": "Represents the binding score, which ranges from 0 (no binding) to 1 (highest binding), indicating the likelihood of the TCR recognizing the annotated epitope. For most purposes, when using the IMWdb as the database, we recommend a score cut-off of 0.2 for determining reliable predictions.",
+							"pl7.app/min": "0",
+							"pl7.app/max": "1"
 						}
 					}
 				},
@@ -44,7 +46,7 @@ spec := func(abundanceSpec) {
 						name: "immunewatch.com/detect/reference",
 						valueType: "String",
 						annotations: {
-							"pl7.app/label": "Reference TCRs",
+							"pl7.app/label": "DETECT Reference TCRs",
 							"pl7.app/info": "TCRs that support the given epitope annotation, and come together with the DOI of the publication where the TCR-Epitope pair was reported"
 						}
 					}
@@ -58,7 +60,7 @@ spec := func(abundanceSpec) {
 						name: "immunewatch.com/detect/antigen",
 						valueType: "String",
 						annotations: {
-							"pl7.app/label": "Antigen"
+							"pl7.app/label": "DETECT Antigen"
 						}
 					}
 				},
@@ -71,7 +73,7 @@ spec := func(abundanceSpec) {
 						name: "immunewatch.com/detect/species",
 						valueType: "String",
 						annotations: {
-							"pl7.app/label": "Species"
+							"pl7.app/label": "DETECT Species"
 						}
 					}
 				},
@@ -84,7 +86,7 @@ spec := func(abundanceSpec) {
 						name: "immunewatch.com/detect/hla",
 						valueType: "String",
 						annotations: {
-							"pl7.app/label": "HLA"
+							"pl7.app/label": "DETECT HLA"
 						}
 					}
 				}

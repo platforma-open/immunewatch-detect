@@ -27,9 +27,13 @@ wf.prepare(func(args) {
 
 wf.body(func(args) {
 	if is_undefined(args.aaSeqCDR3Ref) {
+		// mnzInfo := monetization.
+		// 	builder("PRODUCT:UIRIKGJJYMXREJCJGKUHTWAMOSVESOOTXFDCZWRGARGHNWVM").
+		// 	setDate(args.__mnzDate).
+		// 	build()
 		return {
 			outputs: {
-				mnzInfo: {}
+				mnzInfo: {} //mnzInfo
 			},
 			exports: {}
 		}
