@@ -4,6 +4,7 @@
     "build": "turbo run build",
     "build:dev": "env PL_PKG_DEV=local turbo run build",
     "mark-stable": "turbo run mark-stable",
+    "test": "turbo run test",
     "do-pack": "turbo run do-pack",
     "watch": "turbo watch build",
     "lint": "pnpm -r lint",
