@@ -2,7 +2,6 @@ import type { ImportFileHandle, PlRef } from '@platforma-sdk/model';
 import {
   BlockModel,
   type InferOutputsType,
-  isPColumnSpec,
   parseResourceMap,
 } from '@platforma-sdk/model';
 
@@ -23,26 +22,33 @@ export const model = BlockModel.create()
   .withArgs<BlockArgs>({
     motifMode: false,
     __mnzCanRun: false,
-    __mnzDate: new Date().toISOString(),
+    __mnzDate: '1970-01-01T00:00:00.000Z',
   })
+
   .withUiState<UiState>({})
 
   .argsValid((ctx) => ctx.args.aaSeqCDR3Ref !== undefined && ctx.args.__mnzCanRun)
 
   /** We have to use abundance column as our anchor column as CDR3 has  */
   .output('cdr3Options', (ctx) =>
-    ctx.resultPool.getOptions((c) =>
-      isPColumnSpec(c)
-      && c.valueType === 'String'
-      /* bulk selector */
-      && c.name === 'pl7.app/vdj/sequence'
-      && c.domain?.['pl7.app/vdj/feature'] === 'CDR3'
-      && c.domain?.['pl7.app/alphabet'] === 'aminoacid'
-      && (
-        c.axesSpec?.[0]?.domain?.['pl7.app/vdj/chain'] === 'TCRAlpha'
-        || c.axesSpec?.[0]?.domain?.['pl7.app/vdj/chain'] === 'TCRBeta'),
-    ),
+    ctx.resultPool
+      .getOptions(['TCRAlpha', 'TCRBeta'].map((chain) => ({
+        name: 'pl7.app/vdj/sequence',
+        domain: {
+          'pl7.app/vdj/feature': 'CDR3',
+          'pl7.app/alphabet': 'aminoacid',
+        },
+        axes: [
+          {
+            domain: {
+              'pl7.app/vdj/chain': chain,
+            },
+          },
+        ],
+      }))),
   )
+
+  .enriches((args) => args.aaSeqCDR3Ref ? [args.aaSeqCDR3Ref] : [])
 
   /** Sample labels */
   .output('labels', (ctx) => {

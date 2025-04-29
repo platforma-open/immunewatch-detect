@@ -4,10 +4,13 @@ xsv := import("@platforma-sdk/workflow-tengo:pframes.xsv")
 pConstants := import("@platforma-sdk/workflow-tengo:pframes.constants")
 monetization := import("@platforma-sdk/workflow-tengo:exec.monetization")
 maps := import("@platforma-sdk/workflow-tengo:maps")
+
 productKey := import(":product-key")
 
 times := import("times")
 ll := import("@platforma-sdk/workflow-tengo:ll")
+
+prepareInputCsv := import(":prepare-input-csv")
 
 self.defineOutputs(["mnzInfo"])
 
@@ -16,15 +19,14 @@ self.body(func(inputs) {
 			builder(productKey).
 			setDate(inputs.__mnzDate)
 
-    inputMap := inputs.files.inputs()
-	for sKey in maps.getKeys(inputMap) {
-		inputFile := inputMap[sKey]
+    inputCsvsMap := inputs.inputCsvs.inputs()
+    maps.forEach(inputCsvsMap, func(fileKey, inputFile) {
         mnz.addRun().
             addFile(inputFile, {
                 arg: "repertoire",
                 metrics: ["sha256", "size"]
             })
-    }
+    })
 
     return {
         mnzInfo: mnz.build()

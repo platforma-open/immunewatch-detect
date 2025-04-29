@@ -190,17 +190,17 @@ const motifOptions = [{
         </template>
       </PlTextArea>
 
-      <PlFileInput v-model="app.model.args.databaseFile" label="Custom database">
+      <!-- <PlFileInput v-model="app.model.args.databaseFile" label="Custom database">
         <template #tooltip>
           For best performance use IMWdb (standard). Alternatively, you can upload your own TCR-Epitope data.
         </template>
-      </PlFileInput>
+      </PlFileInput> -->
 
-      <PlBtnGroup v-model="app.model.args.motifMode" label="Motif mode" :options="motifOptions">
+      <!-- <PlBtnGroup v-model="app.model.args.motifMode" label="Motif mode" :options="motifOptions">
         <template #tooltip>
           Unlike the standard output of ImmuneWatch DETECT, which identifies the sequence of the mosa ikely epitope binder, the motif argument will additionally generate a sequence motif. This motif represents a potentially diverse set of epitopes that a given TCR might bind
         </template>
-      </PlBtnGroup>
+      </PlBtnGroup> -->
     </PlAccordionSection>
   </PlSlideModal>
 

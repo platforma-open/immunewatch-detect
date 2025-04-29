@@ -1,63 +1,40 @@
-// "imw_detect"
-json := import("json")
 tpl := import("@platforma-sdk/workflow-tengo:tpl")
+
 text := import("text")
+json := import("json")
 
 sets := import("@platforma-sdk/workflow-tengo:sets")
 assets:= import("@platforma-sdk/workflow-tengo:assets")
 pframes := import("@platforma-sdk/workflow-tengo:pframes")
 render := import("@platforma-sdk/workflow-tengo:render")
 ll := import("@platforma-sdk/workflow-tengo:ll")
-detectImport := import(":import")
 pSpec := import("@platforma-sdk/workflow-tengo:pframes.spec")
 
 monetization := import("@platforma-sdk/workflow-tengo:exec.monetization")
 
-exportTpl := assets.importTemplate(":export")
+detectFormat := import(":detect-format")
+prepareInputCsv := import(":prepare-input-csv")
+
 detectTpl := assets.importTemplate(":detect")
 aggResultsTpl := assets.importTemplate(":agg-results")
 
 slices := import("@platforma-sdk/workflow-tengo:slices")
 
-tpl.defineOutputs(["mnzInfo", "logs", "nEpitopes", "imwColumns"])
+tpl.awaitState("columns", "PColumnBundle")
 
-tpl.body(func(args) {
+tpl.body(func(inputs) {
+	columns := inputs.columns
+	params := inputs.params
+	blockId := inputs.blockId
 
-	abundance := args.abundance
-	cdr3 := args.cdr3
-	vHit := args.vHit
-	jHit := args.jHit
+	cdr3 := columns.getColumn("main") // anchor
+	vHit := columns.getColumn("vHit")
+	jHit := columns.getColumn("jHit")
+	abundance := columns.getColumn("abundance")
+
+	inputCsvs := prepareInputCsv.prepare(cdr3, vHit, jHit, abundance)
 
 	targetOutputs := [{
-		type: "Resource",
-		spec: {
-			kind: "PColumn",
-			name: "immunewatch.com/detect/input-tsv",
-			valueType: "File"
-		},
-		name: "files",
-		path: ["file"]
-	}]
-
-	distiller := pSpec.createSpecDistiller([cdr3.spec, vHit.spec, jHit.spec, abundance.spec])
-	files := pframes.processColumn(
-		abundance,
-		exportTpl,
-		targetOutputs,
-		{
-			aggregate: [1],
-			extra: {
-				cdr3 : {data:cdr3.data, spec: distiller.distill(cdr3.spec)},
-				vHit : {data:vHit.data, spec: distiller.distill(vHit.spec)},
-				jHit : {data:jHit.data, spec: distiller.distill(jHit.spec)}
-			},
-			passDistilledAggregationSpec: true
-		}
-	)
-
-	detectSpec := detectImport.spec(abundance.spec)
-
-	targetOutputs = [{
 		type: "Resource",
 		name: "logs",
 		spec: {
@@ -86,15 +63,17 @@ tpl.body(func(args) {
 	}]
 
 	result := pframes.processColumn(
-		files.output("files"),
+		inputCsvs,
 		detectTpl,
 		targetOutputs,
 		{
 			extra: {
-				/* pass parameters to detect */
+				params: params
 			}
 		}
 	)
+
+	detectSpec := detectFormat.importSpec(blockId, abundance.spec, params.epitopes)
 
 	aggregationOutputs := [ {
 		type: "Xsv",

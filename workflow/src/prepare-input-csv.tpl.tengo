@@ -3,7 +3,7 @@ maps := import("@platforma-sdk/workflow-tengo:maps")
 ll := import("@platforma-sdk/workflow-tengo:ll")
 xsv := import("@platforma-sdk/workflow-tengo:pframes.xsv")
 
-self.defineOutputs("file")
+self.defineOutputs("csv")
 
 overrideLabel := func(col, label) {
 	axisTr := func(spec) {
@@ -30,9 +30,9 @@ self.body(func(inputs) {
     vHit := inputs.vHit
     jHit := inputs.jHit
 
-	file := xsv.exportFrame(
+	csv := xsv.exportFrame(
 		[
-			overrideLabel({data: abundanceData, spec: abundanceSpec}, "abundance"),
+			overrideLabel({ data: abundanceData, spec: abundanceSpec }, "abundance"),
 			overrideLabel(cdr3, "junction_aa"),
 			overrideLabel(vHit, "v_call"),
 			overrideLabel(jHit, "j_call")
@@ -42,6 +42,6 @@ self.body(func(inputs) {
 	)
 
 	return {
-        file: file
+        csv: csv
     }
 })

@@ -20,5 +20,8 @@
     "@changesets/cli": "catalog:",
     "js-yaml": "catalog:"
   },
+  "pnpm": {
+    "overrides": {}
+  },
   "packageManager": "pnpm@9.12.0"
 }
