@@ -45,9 +45,9 @@ importSpec := func(blockId, abundanceSpec, epitopes) {
 				annotations: {
 					"pl7.app/label": epitope ? "DETECT Score (" + epitope + ")" : "DETECT Score",
 					"pl7.app/info": "Represents the binding score, which ranges from 0 (no binding) " +
-									"to 1 (highest binding), indicating the likelihood of the TCR recognizing the " +
-									"annotated epitope. For most purposes, when using the IMWdb as the database, " +
-									"we recommend a score cut-off of 0.2 for determining reliable predictions.",
+						"to 1 (highest binding), indicating the likelihood of the TCR recognizing the " +
+						"annotated epitope. For most purposes, when using the IMWdb as the database, " +
+						"we recommend a score cut-off of 0.2 for determining reliable predictions.",
 					"pl7.app/min": "0",
 					"pl7.app/max": "1"
 				}
@@ -71,8 +71,8 @@ importSpec := func(blockId, abundanceSpec, epitopes) {
 				annotations: {
 					"pl7.app/label": epitope ? "DETECT Reference TCRs (" + epitope + ")" : "DETECT Reference TCRs",
 					"pl7.app/info": "TCRs that support the given epitope annotation, and come " +
-									"together with the DOI of the publication where the TCR-Epitope pair " +
-									"was reported"
+						"together with the DOI of the publication where the TCR-Epitope pair " +
+						"was reported"
 				}
 			}
 		}
@@ -95,60 +95,60 @@ importSpec := func(blockId, abundanceSpec, epitopes) {
 				annotations: {
 					"pl7.app/label": "DETECT Epitope",
 					"pl7.app/info": "The ImmuneWatch DETECT algorithm annotates the epitope " +
-									"specificity of TCRs based on the likeliest epitope from " +
-									"the provided database to be recognized by the TCR. If no " +
-									"corresponding epitope is identified, the value will be 'None'."
+						"specificity of TCRs based on the likeliest epitope from " +
+						"the provided database to be recognized by the TCR. If no " +
+						"corresponding epitope is identified, the value will be 'None'."
 				}
 			}
 		},
-		scoreSpec(undefined),
-		referenceTcrs(undefined),
-		{
-			column: "Antigen",
-			id: "antigen",
-			naRegex: "\\s*",
-			allowNA: true,
-			spec: {
-				name: "immunewatch.com/detect/antigen",
-				valueType: "String",
-				domain: {
-					"immunewatch.com/detect/runId": blockId
-				},
-				annotations: {
-					"pl7.app/label": "DETECT Antigen"
+			scoreSpec(undefined),
+			referenceTcrs(undefined),
+			{
+				column: "Antigen",
+				id: "antigen",
+				naRegex: "\\s*",
+				allowNA: true,
+				spec: {
+					name: "immunewatch.com/detect/antigen",
+					valueType: "String",
+					domain: {
+						"immunewatch.com/detect/runId": blockId
+					},
+					annotations: {
+						"pl7.app/label": "DETECT Antigen"
+					}
 				}
-			}
-		}, {
-			column: "Species",
-			id: "species",
-			naRegex: "\\s*",
-			allowNA: true,
-			spec: {
-				name: "immunewatch.com/detect/species",
-				valueType: "String",
-				domain: {
-					"immunewatch.com/detect/runId": blockId
-				},
-				annotations: {
-					"pl7.app/label": "DETECT Species"
+			}, {
+				column: "Species",
+				id: "species",
+				naRegex: "\\s*",
+				allowNA: true,
+				spec: {
+					name: "immunewatch.com/detect/species",
+					valueType: "String",
+					domain: {
+						"immunewatch.com/detect/runId": blockId
+					},
+					annotations: {
+						"pl7.app/label": "DETECT Species"
+					}
 				}
-			}
-		}, {
-			column: "HLA",
-			id: "hla",
-			naRegex: "\\s*",
-			allowNA: true,
-			spec: {
-				name: "immunewatch.com/detect/hla",
-				valueType: "String",
-				domain: {
-					"immunewatch.com/detect/runId": blockId
-				},
-				annotations: {
-					"pl7.app/label": "DETECT HLA"
+			}, {
+				column: "HLA",
+				id: "hla",
+				naRegex: "\\s*",
+				allowNA: true,
+				spec: {
+					name: "immunewatch.com/detect/hla",
+					valueType: "String",
+					domain: {
+						"immunewatch.com/detect/runId": blockId
+					},
+					annotations: {
+						"pl7.app/label": "DETECT HLA"
+					}
 				}
-			}
-		} ]
+			} ]
 	} else {
 		columns += slices.map(epitopes, func(epitope) {
 			return scoreSpec(epitope)
@@ -158,7 +158,7 @@ importSpec := func(blockId, abundanceSpec, epitopes) {
 		})
 	}
 
-    return {
+	return {
 		axes: [ {
 			column: "clonotypeKey",
 			spec: abundanceSpec.axesSpec[1]
@@ -171,5 +171,5 @@ importSpec := func(blockId, abundanceSpec, epitopes) {
 
 export {
 	splitEpitopes: splitEpitopes,
-    importSpec: importSpec
+	importSpec: importSpec
 }

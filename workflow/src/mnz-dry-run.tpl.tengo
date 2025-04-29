@@ -16,19 +16,19 @@ self.defineOutputs(["mnzInfo"])
 
 self.body(func(inputs) {
 	mnz := monetization.
-			builder(productKey).
-			setDate(inputs.__mnzDate)
+		builder(productKey).
+		setDate(inputs.__mnzDate)
 
-    inputCsvsMap := inputs.inputCsvs.inputs()
-    maps.forEach(inputCsvsMap, func(fileKey, inputFile) {
-        mnz.addRun().
-            addFile(inputFile, {
-                arg: "repertoire",
-                metrics: ["sha256", "size"]
-            })
-    })
+	inputCsvsMap := inputs.inputCsvs.inputs()
+	maps.forEach(inputCsvsMap, func(fileKey, inputFile) {
+		mnz.addRun().
+			addFile(inputFile, {
+			arg: "repertoire",
+			metrics: ["sha256", "size"]
+		})
+	})
 
-    return {
-        mnzInfo: mnz.build()
-    }
+	return {
+		mnzInfo: mnz.build()
+	}
 })

@@ -32,11 +32,11 @@ self.body(func(inputs) {
 		arg("-d").arg("imwdb").
 		enableMnz(productKey).
 		addFile("input.csv", inputFile, {
-			mnz: {
-				arg: "main_input",
-				metrics: ["sha256", "size"]
-			}
-		}).
+		mnz: {
+			arg: "main_input",
+			metrics: ["sha256", "size"]
+		}
+	}).
 		saveFile("result.tsv").
 		cacheHours(48)
 
@@ -46,18 +46,18 @@ self.body(func(inputs) {
 
 	// get stats
 	stats := exec.builder().
-	  	cmd("/usr/bin/env").
-  		printErrStreamToStdout().
+		cmd("/usr/bin/env").
+		printErrStreamToStdout().
 		arg("bash").arg("-c").
-  		arg("cut -f7 input.csv | sort | uniq | wc -l").
+		arg("cut -f7 input.csv | sort | uniq | wc -l").
 		addFile("input.csv", detectTsv).
 		saveStdoutContent().
 		inLightQueue().
 		run()
 
 	return {
-        logs: detectCmd.getStdoutStream(),
-        nEpitopes: stats.getStdoutFileContent(),
+		logs: detectCmd.getStdoutStream(),
+		nEpitopes: stats.getStdoutFileContent(),
 		detectTsv: detectTsv
-    }
+	}
 })

@@ -26,9 +26,9 @@ overrideLabel := func(col, label) {
 self.body(func(inputs) {
 	abundanceData := inputs.__value__
 	abundanceSpec := inputs.__distilled_aggregation_spec__
-    cdr3 := inputs.cdr3
-    vHit := inputs.vHit
-    jHit := inputs.jHit
+	cdr3 := inputs.cdr3
+	vHit := inputs.vHit
+	jHit := inputs.jHit
 
 	csv := xsv.exportFrame(
 		[
@@ -36,12 +36,12 @@ self.body(func(inputs) {
 			overrideLabel(cdr3, "junction_aa"),
 			overrideLabel(vHit, "v_call"),
 			overrideLabel(jHit, "j_call")
-		],
+			],
 		"csv",
 		{ joinType: "Inner" }
 	)
 
 	return {
-        csv: csv
-    }
+		csv: csv
+	}
 })

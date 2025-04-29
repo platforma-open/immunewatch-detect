@@ -25,7 +25,7 @@ self.body(func(inputs) {
 		steps: [ {
 			type: "aggregate",
 			groupBy: ["clonotypeKey"],
-			aggregations: slices.map(aggColumns, func(c){ 
+			aggregations: slices.map(aggColumns, func(c){
 				return {
 					type: "first",
 					src: c,

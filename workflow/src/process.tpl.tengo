@@ -43,24 +43,24 @@ tpl.body(func(inputs) {
 			valueType: "Log"
 		}
 	},
-	{
-		type: "Resource",
-		name: "nEpitopes",
-		spec: {
-			kind: "PColumn",
-			name: "pl7.app/nEpitopes",
-			valueType: "Int"
-		}
-	},
-	{
-		type: "Resource",
-		name: "detectTsv",
-		spec: {
-			kind: "PColumn",
-			name: "pl7.app/detectTsv",
-			valueType: "File"
-		}
-	}]
+		{
+			type: "Resource",
+			name: "nEpitopes",
+			spec: {
+				kind: "PColumn",
+				name: "pl7.app/nEpitopes",
+				valueType: "Int"
+			}
+		},
+		{
+			type: "Resource",
+			name: "detectTsv",
+			spec: {
+				kind: "PColumn",
+				name: "pl7.app/detectTsv",
+				valueType: "File"
+			}
+		}]
 
 	result := pframes.processColumn(
 		inputCsvs,
@@ -90,18 +90,18 @@ tpl.body(func(inputs) {
 
 
 	aggBySample := pframes.processColumn(
-			result.output("detectTsv"),
-			aggResultsTpl,
-			aggregationOutputs,
-			{
-				aggregate: ["pl7.app/sampleId"],
-				extra: {
-					aggColumns: slices.map(detectSpec.columns, func(col) {
-									return col.column
-								})
-				}
+		result.output("detectTsv"),
+		aggResultsTpl,
+		aggregationOutputs,
+		{
+			aggregate: ["pl7.app/sampleId"],
+			extra: {
+				aggColumns: slices.map(detectSpec.columns, func(col) {
+					return col.column
+				})
 			}
-		)
+		}
+	)
 
 	imwColumns := aggBySample.xsvOutputFrame("imw_result")
 

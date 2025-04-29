@@ -29,7 +29,7 @@ abundanceQuery := {
 }
 
 export {
-    vHit: vHitQuery,
-    jHit: jHitQuery,
-    abundance: abundanceQuery
+	vHit: vHitQuery,
+	jHit: jHitQuery,
+	abundance: abundanceQuery
 }
