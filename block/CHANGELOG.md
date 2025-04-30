@@ -1,5 +1,12 @@
 # @platforma-open/immunewatch.detect
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [095ac72]
+  - @platforma-open/immunewatch.detect.workflow@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
