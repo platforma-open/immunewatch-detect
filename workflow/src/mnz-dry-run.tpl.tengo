@@ -23,7 +23,7 @@ self.body(func(inputs) {
 	maps.forEach(inputCsvsMap, func(fileKey, inputFile) {
 		mnz.addRun().
 			addFile(inputFile, {
-			arg: "repertoire",
+			arg: "main_input",
 			metrics: ["sha256", "size"]
 		})
 	})
