@@ -5,7 +5,7 @@
     "build:dev": "env PL_PKG_DEV=local turbo run build",
     "mark-stable": "turbo run mark-stable",
     "test": "turbo run test",
-    "test:dry-run": "turbo run test --env-mode=loose --dry-run=json",.		
+    "test:dry-run": "turbo run test --dry-run=json",		
     "do-pack": "turbo run do-pack",
     "watch": "turbo watch build",
     "lint": "pnpm -r lint",
