@@ -1,0 +1,114 @@
+tpl := import("@platforma-sdk/workflow-tengo:tpl")
+
+text := import("text")
+json := import("json")
+
+sets := import("@platforma-sdk/workflow-tengo:sets")
+assets:= import("@platforma-sdk/workflow-tengo:assets")
+pframes := import("@platforma-sdk/workflow-tengo:pframes")
+render := import("@platforma-sdk/workflow-tengo:render")
+ll := import("@platforma-sdk/workflow-tengo:ll")
+pSpec := import("@platforma-sdk/workflow-tengo:pframes.spec")
+
+monetization := import("@platforma-sdk/workflow-tengo:exec.monetization")
+
+detectFormat := import(":detect-format")
+prepareInputCsv := import(":prepare-input-csv")
+
+detectTpl := assets.importTemplate(":detect")
+aggResultsTpl := assets.importTemplate(":agg-results")
+
+slices := import("@platforma-sdk/workflow-tengo:slices")
+
+tpl.awaitState("columns", "PColumnBundle")
+
+tpl.body(func(inputs) {
+	columns := inputs.columns
+	params := inputs.params
+	blockId := inputs.blockId
+
+	cdr3 := columns.getColumn("main") // anchor
+	vHit := columns.getColumn("vHit")
+	jHit := columns.getColumn("jHit")
+	abundance := columns.getColumn("abundance")
+
+	inputCsvs := prepareInputCsv.prepare(cdr3, vHit, jHit, abundance)
+
+	targetOutputs := [{
+		type: "Resource",
+		name: "logs",
+		spec: {
+			kind: "PColumn",
+			name: "pl7.app/log",
+			valueType: "Log"
+		}
+	},
+		{
+			type: "Resource",
+			name: "nEpitopes",
+			spec: {
+				kind: "PColumn",
+				name: "pl7.app/nEpitopes",
+				valueType: "Int"
+			}
+		},
+		{
+			type: "Resource",
+			name: "detectTsv",
+			spec: {
+				kind: "PColumn",
+				name: "pl7.app/detectTsv",
+				valueType: "File"
+			}
+		}]
+
+	result := pframes.processColumn(
+		inputCsvs,
+		detectTpl,
+		targetOutputs,
+		{
+			extra: {
+				params: params
+			}
+		}
+	)
+
+	detectSpec := detectFormat.importSpec(blockId, abundance.spec, params.epitopes)
+
+	aggregationOutputs := [ {
+		type: "Xsv",
+		xsvType: "tsv",
+		settings: {
+			axes: detectSpec.axes,
+			columns: detectSpec.columns,
+			storageFormat: "Binary",
+			partitionKeyLength: 0
+		},
+		name: "imw_result",
+		path: ["tsv"]
+	} ]
+
+
+	aggBySample := pframes.processColumn(
+		result.output("detectTsv"),
+		aggResultsTpl,
+		aggregationOutputs,
+		{
+			aggregate: ["pl7.app/sampleId"],
+			extra: {
+				aggColumns: slices.map(detectSpec.columns, func(col) {
+					return col.column
+				})
+			}
+		}
+	)
+
+	imwColumns := aggBySample.xsvOutputFrame("imw_result")
+
+	return {
+		mnzInfo: {},
+		logs: result.outputData("logs"),
+		nEpitopes: result.outputData("nEpitopes"),
+		imwColumns: imwColumns
+	}
+})

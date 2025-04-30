@@ -4,47 +4,60 @@ xsv := import("@platforma-sdk/workflow-tengo:pframes.xsv")
 assets := import("@platforma-sdk/workflow-tengo:assets")
 ll := import("@platforma-sdk/workflow-tengo:ll")
 productKey := import(":product-key")
+text := import("text")
 
-detectSw := assets.importSoftware("@platforma-open/immunewatch.software-detect:detect")
+detectSw := assets.importSoftware("@platforma-open/immunewatch.software-detect:main")
 
 self.defineOutputs(["logs", "nEpitopes", "detectTsv"])
 
 self.body(func(inputs) {
 	inputFile := inputs.__value__
-	imw_detect := exec.builder().
+	params := inputs.params
+	epitopes := params.epitopes
+
+	detectCmdBuilder := exec.builder().
 		software(detectSw).
-		printErrStreamToStdout().
+		printErrStreamToStdout()
+
+	if !is_undefined(epitopes) {
+		detectCmdBuilder.arg("--epitope")
+		for epitope in epitopes {
+			detectCmdBuilder.arg(epitope)
+		}
+	}
+
+	detectCmdBuilder.
 		arg("-o").arg("result.tsv").
 		arg("-i").arg("input.csv").
 		arg("-d").arg("imwdb").
 		enableMnz(productKey).
 		addFile("input.csv", inputFile, {
-			mnz: {
-				arg: "main_input",
-				metrics: ["sha256", "size"]
-			}
-		}).
+		mnz: {
+			arg: "main_input",
+			metrics: ["sha256", "size"]
+		}
+	}).
 		saveFile("result.tsv").
-		cacheHours(48).
-		saveStdoutContent().
-		run()
+		cacheHours(48)
 
-	imw_result := imw_detect.getFile("result.tsv")
+	detectCmd := detectCmdBuilder.run()
+
+	detectTsv := detectCmd.getFile("result.tsv")
 
 	// get stats
 	stats := exec.builder().
-	  	cmd("/usr/bin/env").
-  		printErrStreamToStdout().
+		cmd("/usr/bin/env").
+		printErrStreamToStdout().
 		arg("bash").arg("-c").
-  		arg("cut -f7 input.csv | sort | uniq | wc -l").
-		addFile("input.csv", imw_result).
+		arg("cut -f7 input.csv | sort | uniq | wc -l").
+		addFile("input.csv", detectTsv).
 		saveStdoutContent().
 		inLightQueue().
 		run()
 
 	return {
-        logs: imw_detect.getStdoutStream(),
-        nEpitopes: stats.getStdoutFileContent(),
-		detectTsv: imw_result
-    }
+		logs: detectCmd.getStdoutStream(),
+		nEpitopes: stats.getStdoutFileContent(),
+		detectTsv: detectTsv
+	}
 })

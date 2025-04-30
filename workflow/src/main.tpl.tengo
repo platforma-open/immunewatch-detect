@@ -1,50 +1,39 @@
-// "imw_detect"
 wf := import("@platforma-sdk/workflow-tengo:workflow")
 assets:= import("@platforma-sdk/workflow-tengo:assets")
 pframes := import("@platforma-sdk/workflow-tengo:pframes")
 llPframes := import("@platforma-sdk/workflow-tengo:pframes.ll")
 render := import("@platforma-sdk/workflow-tengo:render")
 pUtil := import("@platforma-sdk/workflow-tengo:pframes.util")
-detectImport := import(":import")
-
-prepareTsv := assets.importTemplate(":prepare-tsv")
-exportTpl := assets.importTemplate(":export")
-detectTpl := assets.importTemplate(":detect")
 ll := import("@platforma-sdk/workflow-tengo:ll")
 
-wf.setPreRun(assets.importTemplate(":pre-run"))
+detectFormat := import(":detect-format")
+
+processTpl := assets.importTemplate(":process")
 
 queries := import(":queries")
 
-wf.prepare(func(args) {
-	bundleBuilder := wf.createPBundleBuilder()
-	bundleBuilder.addAnchor("main", args.aaSeqCDR3Ref) 
-	bundleBuilder.addSingle(queries.vHit, "vHit")
-	bundleBuilder.addSingle(queries.jHit, "jHit")
-	bundleBuilder.addSingle(queries.abundance, "abundance")
-	return {
-		columns: bundleBuilder.build()
-	}
-})
+wf.setPreRun(assets.importTemplate(":pre-run"))
 
 wf.body(func(args) {
 
-	columns := args.columns
-	
-	cdr3 := columns.getColumn(args.aaSeqCDR3Ref)
-	vHit := columns.getColumn("vHit")
-	jHit := columns.getColumn("jHit")
-	abundance := columns.getColumn("abundance")
+	bundleBuilder := wf.createPBundleBuilder()
+	bundleBuilder.addAnchor("main", args.aaSeqCDR3Ref)
+	bundleBuilder.addSingle(queries.vHit, "vHit")
+	bundleBuilder.addSingle(queries.jHit, "jHit")
+	bundleBuilder.addSingle(queries.abundance, "abundance")
 
-	result := render.create(prepareTsv, {
-		cdr3 : cdr3,
-		vHit : vHit,
-		jHit : jHit,
-		abundance : abundance,
+	columns := bundleBuilder.build()
+
+	result := render.createEphemeral(processTpl, {
+		columns: columns,
 		mnzDryRun: false,
+		params: {
+			epitopes: detectFormat.splitEpitopes(args.epitopes)
+		},
+		blockId: wf.getBlockId(),
 		__mnzDate: args.__mnzDate
 	})
-	
+
 	return {
 		outputs: {
 			logs: result.output("logs"),

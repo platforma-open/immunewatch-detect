@@ -1,0 +1,40 @@
+pSpec := import("@platforma-sdk/workflow-tengo:pframes.spec")
+pframes := import("@platforma-sdk/workflow-tengo:pframes")
+assets := import("@platforma-sdk/workflow-tengo:assets")
+
+prepareInputCsvTpl := assets.importTemplate(":prepare-input-csv")
+
+prepare := func(cdr3, vHit, jHit, abundance) {
+	targetOutputs := [{
+		type: "Resource",
+		spec: {
+			kind: "PColumn",
+			name: "immunewatch.com/detect/input-tsv",
+			valueType: "File"
+		},
+		name: "csv",
+		path: ["csv"]
+	}]
+
+	distiller := pSpec.createSpecDistiller([cdr3.spec, vHit.spec, jHit.spec, abundance.spec])
+	inputCsvs := pframes.processColumn(
+		abundance,
+		prepareInputCsvTpl,
+		targetOutputs,
+		{
+			aggregate: [1],
+			extra: {
+				cdr3: { data: cdr3.data, spec: distiller.distill(cdr3.spec) },
+				vHit: { data: vHit.data, spec: distiller.distill(vHit.spec) },
+				jHit: { data: jHit.data, spec: distiller.distill(jHit.spec) }
+			},
+			passDistilledAggregationSpec: true
+		}
+	)
+
+	return inputCsvs.output("csv")
+}
+
+export {
+	prepare: prepare
+}

@@ -4,10 +4,9 @@ render := import("@platforma-sdk/workflow-tengo:render")
 pSpec := import("@platforma-sdk/workflow-tengo:pframes.spec")
 pframes := import("@platforma-sdk/workflow-tengo:pframes")
 
-prepareTsv := assets.importTemplate(":prepare-tsv")
+prepareInputCsv := import(":prepare-input-csv")
 
 mnzDryRunTpl := assets.importTemplate(":mnz-dry-run")
-exportTpl := assets.importTemplate(":export")
 
 queries := import(":queries")
 
@@ -45,35 +44,10 @@ wf.body(func(args) {
 	jHit := columns.getColumn("jHit")
 	abundance := columns.getColumn("abundance")
 
-	targetOutputs := [{
-		type: "Resource",
-		spec: {
-			kind: "PColumn",
-			name: "immunewatch.com/detect/input-tsv",
-			valueType: "File"
-		},
-		name: "files",
-		path: ["file"]
-	}]
-
-	distiller := pSpec.createSpecDistiller([cdr3.spec, vHit.spec, jHit.spec, abundance.spec])
-	files := pframes.processColumn(
-		abundance,
-		exportTpl,
-		targetOutputs,
-		{
-			aggregate: [1],
-			extra: {
-				cdr3 : {data:cdr3.data, spec: distiller.distill(cdr3.spec)},
-				vHit : {data:vHit.data, spec: distiller.distill(vHit.spec)},
-				jHit : {data:jHit.data, spec: distiller.distill(jHit.spec)}
-			},
-			passDistilledAggregationSpec: true
-		}
-	)
+	inputCsvs := prepareInputCsv.prepare(cdr3, vHit, jHit, abundance)
 
 	result := render.create(mnzDryRunTpl, {
-		files: files.outputData("files"),
+		inputCsvs: inputCsvs.data,
 		__mnzDate: args.__mnzDate
 	})
 
