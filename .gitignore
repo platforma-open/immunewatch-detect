@@ -10,3 +10,4 @@ test-dry-run.json
 vite.config.*.timestamp-*
 software/**/*.sw.json
 software/*.tgz
+.idea/

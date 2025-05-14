@@ -17,8 +17,8 @@ export type ResultEntry = {
 function parseProgress(lines: string | undefined): DetectProgress | undefined {
   if (!lines) return undefined;
   const line = lines.split('\n').reverse().find((l) => l.includes('%'));
-  if (!line || line.indexOf('%') < 0) return undefined;
-  const percentage = parseInt(line.substring(0, line.indexOf('%')));
+  if (!line || line.indexOf('%') < 0 || line.indexOf(' ') < 0) return undefined;
+  const percentage = parseInt(line.substring(line.indexOf(' ') + 1, line.indexOf('%')));
   if (Number.isNaN(percentage)) return undefined;
 
   return {
