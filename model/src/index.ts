@@ -84,7 +84,7 @@ export const model = BlockModel.create()
 
   /** Detect progress */
   .output('progress', (wf) => {
-    return parseResourceMap(wf.outputs?.resolve('logs'), (acc) => acc.getLastLogs(3), false);
+    return parseResourceMap(wf.outputs?.resolve('logs'), (acc) => acc.getProgressLog('Progress'), false);
   })
 
   /** Monetization status */
