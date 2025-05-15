@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { useApp } from './app';
 
 export type DetectProgress = {
+  stage: string;
   value: number;
   progressString: string;
 };
@@ -18,10 +19,13 @@ function parseProgress(lines: string | undefined): DetectProgress | undefined {
   if (!lines) return undefined;
   const line = lines.split('\n').reverse().find((l) => l.includes('%'));
   if (!line || line.indexOf('%') < 0 || line.indexOf(' ') < 0) return undefined;
-  const percentage = parseInt(line.substring(line.indexOf(' ') + 1, line.indexOf('%')));
+  const spacePosition = line.indexOf(' ');
+  const stage = line.substring(0, spacePosition);
+  const percentage = parseInt(line.substring(spacePosition + 1, line.indexOf('%')));
   if (Number.isNaN(percentage)) return undefined;
 
   return {
+    stage,
     value: percentage,
     progressString: percentage + '%',
   };
