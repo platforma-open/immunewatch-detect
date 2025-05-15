@@ -30,13 +30,14 @@ self.body(func(inputs) {
 		arg("-o").arg("result.tsv").
 		arg("-i").arg("input.csv").
 		arg("-d").arg("imwdb").
+		env("PYTHONUNBUFFERED", "TRUE").
 		enableMnz(productKey).
 		addFile("input.csv", inputFile, {
-		mnz: {
-			arg: "main_input",
-			metrics: ["sha256", "size"]
-		}
-	}).
+			mnz: {
+				arg: "main_input",
+				metrics: ["sha256", "size"]
+			}
+		}).
 		saveFile("result.tsv").
 		cacheHours(48)
 

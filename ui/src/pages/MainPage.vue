@@ -93,7 +93,7 @@ const columnDefs: ColDef<TableRow>[] = [
           progress: data?.progress?.value,
           progressString: data?.progress?.progressString,
           stage: data?.progress === undefined ? 'not_started' : 'running',
-          step: data?.progress === undefined ? 'Queued' : (data?.progress.value < 1.0 ? 'Running' : 'Done'),
+          step: data?.progress === undefined ? 'Queued' : (data?.progress.value < 100 ? 'Running' : 'Done'),
         } satisfies PlProgressCellProps,
       };
     },
