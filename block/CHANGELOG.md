@@ -1,5 +1,16 @@
 # @platforma-open/immunewatch.detect
 
+## 1.1.0
+
+### Minor Changes
+
+- 0f9db0d: Add progress bar and use updated binaries
+
+### Patch Changes
+
+- Updated dependencies [0f9db0d]
+  - @platforma-open/immunewatch.detect.ui@1.1.0
+
 ## 1.0.2
 
 ### Patch Changes
