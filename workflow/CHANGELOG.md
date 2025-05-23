@@ -1,5 +1,11 @@
 # @platforma-open/immunewatch.detect.workflow
 
+## 1.0.3
+
+### Patch Changes
+
+- 2b724dd: Fix the discrepancy between dry-run and run-spec (repertoire/main_input)
+
 ## 1.0.2
 
 ### Patch Changes
