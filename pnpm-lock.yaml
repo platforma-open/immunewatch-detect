@@ -34,8 +34,8 @@ catalogs:
       specifier: ^1.30.12
       version: 1.30.12
     '@platforma-sdk/ui-vue':
-      specifier: ^1.30.11
-      version: 1.30.11
+      specifier: ^1.30.13
+      version: 1.30.13
     '@platforma-sdk/workflow-tengo':
       specifier: ^4.2.3
       version: 4.2.3
@@ -141,7 +141,7 @@ importers:
         version: 1.30.11
       '@platforma-sdk/ui-vue':
         specifier: 'catalog:'
-        version: 1.30.11(typescript@5.5.4)
+        version: 1.30.13(typescript@5.5.4)
       ag-grid-enterprise:
         specifier: 'catalog:'
         version: 33.2.4
@@ -1222,8 +1222,8 @@ packages:
   '@platforma-sdk/test@1.30.12':
     resolution: {integrity: sha512-YYe9BWJsKG2EXpbj8eHH3B2P1Y7EsKHmDvH/8HQilVXDEKCbp9YZ7R7QvE0lv34GmwL7JNaLkSTbS+YATeix3A==}
 
-  '@platforma-sdk/ui-vue@1.30.11':
-    resolution: {integrity: sha512-fIxiijXfBgxLjjiBMiPvbG+pMCJ47shlTlnDCu0Wmfu91Sye3Dccvux6ZxNpJ3vKn76mC1r0/IiPUtArIpid4Q==}
+  '@platforma-sdk/ui-vue@1.30.13':
+    resolution: {integrity: sha512-y2rXEZ+6Jwt15iYcd4AUcjhNazJCGrEnPW2zVElBQEcjB4SKIpPXoHTFPbzAQJioIvKACHrJg3Q6IOYmzhsNgw==}
 
   '@platforma-sdk/ui-vue@1.30.3':
     resolution: {integrity: sha512-i97I7sROJr7DzVQSeYUvmhTQrCjxKKPVsQCBJ0WNOi+BfWxSF+abaZOX+uILpqilSonMCPUIAj7g9+x7FqEobg==}
@@ -6656,7 +6656,7 @@ snapshots:
       - supports-color
       - terser
 
-  '@platforma-sdk/ui-vue@1.30.11(typescript@5.5.4)':
+  '@platforma-sdk/ui-vue@1.30.13(typescript@5.5.4)':
     dependencies:
       '@milaboratories/uikit': 2.2.72(typescript@5.5.4)
       '@platforma-sdk/model': 1.30.11
