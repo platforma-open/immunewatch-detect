@@ -1,5 +1,11 @@
 # @platforma-open/immunewatch.detect.workflow
 
+## 1.0.4
+
+### Patch Changes
+
+- 85ce137: chore: update deps
+
 ## 1.0.3
 
 ### Patch Changes
