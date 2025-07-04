@@ -1,5 +1,11 @@
 # @platforma-open/immunewatch.detect
 
+## 1.1.3
+
+### Patch Changes
+
+- 0d94a94: chore: publish stable version
+
 ## 1.1.2
 
 ### Patch Changes
