@@ -13,11 +13,11 @@ catalogs:
       specifier: ^1.1.83
       version: 1.1.83
     '@platforma-open/immunewatch.software-detect':
-      specifier: 4.0.1
-      version: 4.0.1
+      specifier: 4.0.0
+      version: 4.0.0
     '@platforma-open/milaboratories.software-ptransform':
-      specifier: ^1.5.0
-      version: 1.6.4
+      specifier: ^1.3.1
+      version: 1.3.1
     '@platforma-sdk/block-tools':
       specifier: ^2.5.44
       version: 2.5.44
@@ -37,8 +37,8 @@ catalogs:
       specifier: ^1.30.13
       version: 1.30.13
     '@platforma-sdk/workflow-tengo':
-      specifier: ^5.2.0
-      version: 5.2.2
+      specifier: ^4.7.1
+      version: 4.7.1
     '@vitejs/plugin-vue':
       specifier: ^5.1.4
       version: 5.2.3
@@ -172,13 +172,13 @@ importers:
     dependencies:
       '@platforma-open/immunewatch.software-detect':
         specifier: 'catalog:'
-        version: 4.0.1
+        version: 4.0.0
       '@platforma-open/milaboratories.software-ptransform':
         specifier: 'catalog:'
-        version: 1.6.4
+        version: 1.3.1
       '@platforma-sdk/workflow-tengo':
         specifier: 'catalog:'
-        version: 5.2.2
+        version: 4.7.1
     devDependencies:
       '@platforma-sdk/tengo-builder':
         specifier: 'catalog:'
@@ -1116,9 +1116,6 @@ packages:
   '@milaboratories/software-pframes-conv@2.2.2':
     resolution: {integrity: sha512-eJIp1YGi6g83peviw8SYlr5N4KV2SmDi3Mhz2FjrS4d/WaKOhoTD9+YvRpOTCQ0KyT44FNRF+nCoN/idKT3SzA==}
 
-  '@milaboratories/software-pframes-conv@2.2.7':
-    resolution: {integrity: sha512-FFZRPP8C86cJdGbaj6t/FmHSfRyuSWnXw8d6UACtPLh7sQRRuwi95LBp808sPP5vqFWBHFijvuh0CtXdSrjZYA==}
-
   '@milaboratories/tengo-tester@1.6.1':
     resolution: {integrity: sha512-gLUeCj6TmvNzbLYj/vX2Zz6zUaITst0Dpfkz+ycctWBuAUM+lFFZbjRHvDQlt0W6Azy0PPc8wnWsoJtspfM74w==}
     os: [darwin, linux, win32]
@@ -1161,17 +1158,14 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@platforma-open/immunewatch.software-detect@4.0.1':
-    resolution: {integrity: sha512-uQIvccwD/WyX98VCwKvKIA9pG72MzYb0+6gjRzc9UkiJolR+HPKEqydAF6Uv51K4meya/8D6Iy2gDtiTBw9iww==}
+  '@platforma-open/immunewatch.software-detect@4.0.0':
+    resolution: {integrity: sha512-H7njpE1rpnNL5Rzcer7w2Iqj+SHGNVlufI9P7DA1NtuC9p87z/AST4upvbqziqMtOAnx/s4ZEmChJvShPwnH1w==}
 
-  '@platforma-open/milaboratories.software-ptabler@1.12.4':
-    resolution: {integrity: sha512-owDO4imeBgHawQRrHV9GbsA+8WJaIl0Mlxwam1unUsfnCOWxqtbWi9Kt+Q201otp4VjACPbA5KOtO6Czwz4hHg==}
+  '@platforma-open/milaboratories.software-ptabler@1.6.0':
+    resolution: {integrity: sha512-pHOMYwDikYB2L8K7XoTHDNJ7lr+mGIXv88iov1UZkSdvdOTb+owD3xZ3u9uxDNwyzyiQ7a4E+MIAdx/eJEYL8g==}
 
-  '@platforma-open/milaboratories.software-ptexter@1.1.1':
-    resolution: {integrity: sha512-nTKuFoDm+IhlD3uCktYrpjJ1pJ8TUrGOGAACbLoPwu65iRPOjohmrBZxFux+7eill+aJmqEsy+xF41Dw4mfnkg==}
-
-  '@platforma-open/milaboratories.software-ptransform@1.6.4':
-    resolution: {integrity: sha512-DUHczUe9xk0jSGSlKqSWPU6bpLVTO5QsoX7hHC0hR/1yEpMmQ2RZM/zXCKHuYn3gdC0UnWI9RX6W/RZx+c+7Nw==}
+  '@platforma-open/milaboratories.software-ptransform@1.3.1':
+    resolution: {integrity: sha512-F/S/fm0PxKl2zpZXWdmjytZdbK33KE5L772xCcs0YLTb02ejpLje9Ls1OUWixgXt1R8ulKtHuiKTVuFkq/wPJw==}
 
   '@platforma-open/milaboratories.software-small-binaries.guided-command@1.0.4':
     resolution: {integrity: sha512-LD8XQDnR+L9oRD7JXE0VWGmv1/0cm+J71flrwBUWeIbuaenPC8Nsza8oy7JjLJ8AX+bm8XAyyJALuqBBqkL95Q==}
@@ -1254,8 +1248,8 @@ packages:
   '@platforma-sdk/workflow-tengo@4.2.3':
     resolution: {integrity: sha512-KLR+FeOrzPzWh1HyDSWa8bsOnaVahbNvKvfu3ofltOXCHFNJzFBLy8DXMmib7OhwBByHly7HgfyH4qnku3vTyg==}
 
-  '@platforma-sdk/workflow-tengo@5.2.2':
-    resolution: {integrity: sha512-4DL5Y7ZoIrXbXrpa2D4q7XuNBXUArdPzqbug3fvjBGrBuWwlYkh6HhsiqswAVNyfictm4M/bT1vWtnY9eS7dhQ==}
+  '@platforma-sdk/workflow-tengo@4.7.1':
+    resolution: {integrity: sha512-aKu3ereM1k2H6nUPxkGnortLq+wMLKKYzOk4p8IWi2jdPMfNP3G6z+FGwnPF1P8ZNCXOrj1LtXAZi6KSDYOKow==}
 
   '@protobuf-ts/grpc-transport@2.9.6':
     resolution: {integrity: sha512-MdL6aiIhlEdXn0ZVmMfFtXtNPze21vqUW3w+E3MDqv/hgyPf5jpvQeRz+9+lu2flPfXRf+2w2d+6nWpMv25o6Q==}
@@ -6516,8 +6510,6 @@ snapshots:
 
   '@milaboratories/software-pframes-conv@2.2.2': {}
 
-  '@milaboratories/software-pframes-conv@2.2.7': {}
-
   '@milaboratories/tengo-tester@1.6.1': {}
 
   '@milaboratories/ts-helpers-oclif@1.1.17':
@@ -6583,13 +6575,11 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@platforma-open/immunewatch.software-detect@4.0.1': {}
+  '@platforma-open/immunewatch.software-detect@4.0.0': {}
 
-  '@platforma-open/milaboratories.software-ptabler@1.12.4': {}
+  '@platforma-open/milaboratories.software-ptabler@1.6.0': {}
 
-  '@platforma-open/milaboratories.software-ptexter@1.1.1': {}
-
-  '@platforma-open/milaboratories.software-ptransform@1.6.4': {}
+  '@platforma-open/milaboratories.software-ptransform@1.3.1': {}
 
   '@platforma-open/milaboratories.software-small-binaries.guided-command@1.0.4': {}
 
@@ -6757,11 +6747,10 @@ snapshots:
       '@milaboratories/software-pframes-conv': 2.2.2
       '@platforma-open/milaboratories.software-small-binaries': 1.15.20
 
-  '@platforma-sdk/workflow-tengo@5.2.2':
+  '@platforma-sdk/workflow-tengo@4.7.1':
     dependencies:
-      '@milaboratories/software-pframes-conv': 2.2.7
-      '@platforma-open/milaboratories.software-ptabler': 1.12.4
-      '@platforma-open/milaboratories.software-ptexter': 1.1.1
+      '@milaboratories/software-pframes-conv': 2.2.2
+      '@platforma-open/milaboratories.software-ptabler': 1.6.0
       '@platforma-open/milaboratories.software-small-binaries': 1.15.21
 
   '@protobuf-ts/grpc-transport@2.9.6(@grpc/grpc-js@1.13.3)':
