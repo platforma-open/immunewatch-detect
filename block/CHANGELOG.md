@@ -1,5 +1,11 @@
 # @platforma-open/immunewatch.detect
 
+## 1.1.4
+
+### Patch Changes
+
+- 40e3b14: technical release
+
 ## 1.1.3
 
 ### Patch Changes
