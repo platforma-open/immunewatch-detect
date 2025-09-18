@@ -7,7 +7,7 @@ packages:
 catalog:
   "@platforma-sdk/model": ^1.30.11
   "@platforma-sdk/ui-vue": ^1.30.13
-  "@platforma-sdk/workflow-tengo": ^4.7.1
+  "@platforma-sdk/workflow-tengo": ^5.2.0
   "@platforma-sdk/block-tools": ^2.5.44
   "@platforma-sdk/test": ^1.30.12
   "@platforma-sdk/tengo-builder": ^2.1.7
@@ -19,7 +19,7 @@ catalog:
   "@milaboratories/software-pframes-conv": ^2.2.2
   "@platforma-open/milaboratories.software-small-binaries": ^1.15.16
   "@platforma-open/milaboratories.software-ptransform": ^1.5.0
-  "@platforma-open/immunewatch.software-detect": 4.0.0
+  "@platforma-open/immunewatch.software-detect": 4.0.1
 
   'ag-grid-enterprise': &ag-grid ^33.2.4
   'ag-grid-vue3': *ag-grid
