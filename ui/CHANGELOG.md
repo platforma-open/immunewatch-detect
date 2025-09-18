@@ -1,5 +1,13 @@
 # @platforma-open/immunewatch.detect.ui
 
+## 1.1.1
+
+### Patch Changes
+
+- 5b6358e: bugfix
+- Updated dependencies [5b6358e]
+  - @platforma-open/immunewatch.detect.model@1.0.2
+
 ## 1.1.0
 
 ### Minor Changes
