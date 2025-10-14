@@ -10,7 +10,7 @@ catalog:
   "@platforma-sdk/workflow-tengo": ^5.3.3
   "@platforma-sdk/block-tools": ^2.5.44
   "@platforma-sdk/test": ^1.30.12
-  "@platforma-sdk/tengo-builder": ^2.1.7
+  "@platforma-sdk/tengo-builder": ^2.3.0
   "@platforma-sdk/package-builder": ^3.8.0
   "@milaboratories/graph-maker": ^1.1.83
   "@platforma-sdk/eslint-config": ^1.0.3
