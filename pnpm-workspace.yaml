@@ -16,7 +16,7 @@ catalog:
   "@platforma-sdk/eslint-config": ^1.0.3
 
   "@platforma-open/milaboratories.runenv-python-3": ^3.12.6
-  "@milaboratories/software-pframes-conv": ^2.2.2
+  "@milaboratories/software-pframes-conv": ^2.2.7
   "@platforma-open/milaboratories.software-small-binaries": ^1.15.16
   "@platforma-open/milaboratories.software-ptransform": ^1.6.6
   "@platforma-open/immunewatch.software-detect": 4.0.2
