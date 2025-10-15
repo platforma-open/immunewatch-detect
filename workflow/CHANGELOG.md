@@ -1,5 +1,16 @@
 # @platforma-open/immunewatch.detect.workflow
 
+## 1.0.6
+
+### Patch Changes
+
+- 894bdc3: technical release
+- cfbb35e: technical release
+- c6d6f03: technical release
+- eebbe7b: technical release
+- 1a7b276: technical release
+- 7c91cf7: technical release
+
 ## 1.0.5
 
 ### Patch Changes
