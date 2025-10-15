@@ -13,8 +13,8 @@ catalogs:
       specifier: ^1.1.83
       version: 1.1.83
     '@platforma-open/immunewatch.software-detect':
-      specifier: 4.0.0
-      version: 4.0.0
+      specifier: 4.0.2
+      version: 4.0.2
     '@platforma-open/milaboratories.software-ptransform':
       specifier: ^1.6.6
       version: 1.6.6
@@ -172,7 +172,7 @@ importers:
     dependencies:
       '@platforma-open/immunewatch.software-detect':
         specifier: 'catalog:'
-        version: 4.0.0
+        version: 4.0.2
       '@platforma-open/milaboratories.software-ptransform':
         specifier: 'catalog:'
         version: 1.6.6
@@ -1318,8 +1318,8 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@platforma-open/immunewatch.software-detect@4.0.0':
-    resolution: {integrity: sha512-H7njpE1rpnNL5Rzcer7w2Iqj+SHGNVlufI9P7DA1NtuC9p87z/AST4upvbqziqMtOAnx/s4ZEmChJvShPwnH1w==}
+  '@platforma-open/immunewatch.software-detect@4.0.2':
+    resolution: {integrity: sha512-X72+GnFLP01PdTtqf64gI8d7zeuumK9q45NkBoKDUeIh76Dzb3SfOybxkEY6P/uSdbtTTEvQN+5+l2bOM35R8g==}
 
   '@platforma-open/milaboratories.software-ptabler@1.12.4':
     resolution: {integrity: sha512-owDO4imeBgHawQRrHV9GbsA+8WJaIl0Mlxwam1unUsfnCOWxqtbWi9Kt+Q201otp4VjACPbA5KOtO6Czwz4hHg==}
@@ -7462,7 +7462,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@platforma-open/immunewatch.software-detect@4.0.0': {}
+  '@platforma-open/immunewatch.software-detect@4.0.2': {}
 
   '@platforma-open/milaboratories.software-ptabler@1.12.4': {}
 
