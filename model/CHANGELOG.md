@@ -1,5 +1,11 @@
 # @platforma-open/immunewatch.detect.model
 
+## 1.0.4
+
+### Patch Changes
+
+- 5f5d93b: technical release
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @platforma-open/immunewatch.detect.ui
 
+## 1.1.3
+
+### Patch Changes
+
+- 5f5d93b: technical release
+- Updated dependencies [5f5d93b]
+  - @platforma-open/immunewatch.detect.model@1.0.4
+
 ## 1.1.2
 
 ### Patch Changes
